@@ -735,6 +735,197 @@
             gap: 1rem;
         }
 
+        /* Program images tabs - Enhanced Design */
+        .program-images-tabs {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .program-images-tab {
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            border: 3px solid transparent;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .program-images-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(37, 99, 235, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .program-images-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.2);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        .program-images-tab:hover::before {
+            opacity: 1;
+        }
+
+        .program-images-tab.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .program-images-tab.active::before {
+            opacity: 0;
+        }
+
+        .program-images-wrapper {
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .program-images-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .program-images-content.active {
+            display: block;
+        }
+
+        .program-content-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .program-content-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .program-days-badge {
+            display: inline-flex;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .program-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .program-image-card {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .program-image-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+        }
+
+        .program-day-label {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .program-image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .program-image-card:hover img {
+            transform: scale(1.02);
+        }
+
+        .program-image-overlay {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .program-image-card:hover .program-image-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .program-images-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .program-content-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .program-day-label {
+                top: 1.5rem;
+                right: 1.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
         .timeline-item {
             background: var(--white);
             border-left: 4px solid var(--primary-color);
@@ -1548,7 +1739,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Start</a></li>
                 <li><a href="#about">O Warsztatach</a></li>
-                <li><a href="#program">Program</a></li>
+                <li><a href="#program-images">Program</a></li>
                 <li><a href="#speakers">Prelegenci</a></li>
                 <li><a href="#location">Lokalizacja</a></li>
                 <li><a href="#registration">Rejestracja</a></li>
@@ -1611,16 +1802,16 @@
                     <p>
                         <strong style="color: #10b981; font-size: 1.1em; display: inline-flex; align-items: center; gap: 0.5rem;">
                             <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 1.1rem; font-weight: 800; border-radius: 8px;">1</span>
-                            Ścieżka 1: Leczenie Ran Przewlekłych
+                            Ścieżka 1: Leczenie Żywieniowe
                         </strong><br>
-                        Podstawowy kurs leczenia ran, terapia podciśnieniowa, kompresjoterapia, zajęcia praktyczne z pacjentami, kurs leczenia bólu.
+                        Leczenie żywieniowe pozajelitowe i dojelitowe, endoskopowa gastropeksja z gastrostomią odżywczą, centralne dostępy naczyniowe.
                     </p>
                     <p>
                         <strong style="color: #10b981; font-size: 1.1em; display: inline-flex; align-items: center; gap: 0.5rem;">
                             <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 1.1rem; font-weight: 800; border-radius: 8px;">2</span>
-                            Ścieżka 2: Leczenie Żywieniowe
+                            Ścieżka 2: Leczenie Ran Przewlekłych
                         </strong><br>
-                        Leczenie żywieniowe pozajelitowe i dojelitowe, endoskopowa gastropeksja z gastrostomią odżywczą, centralne dostępy naczyniowe.
+                        Podstawowy kurs leczenia ran, terapia podciśnieniowa, kompresjoterapia, zajęcia praktyczne z pacjentami, kurs leczenia bólu.
                     </p>
                 </div>
                 <div class="about-image">
@@ -1672,164 +1863,18 @@
         </div>
     </section>
 
-    <!-- Program Section -->
-    <section class="program fade-in" id="program">
+
+    <!-- Speakers Section (legacy, ukryta) -->
+    <section class="speakers fade-in" id="speakers-legacy" style="display: none;">
         <div class="container">
-            <h2 class="section-title">Program Warsztatów</h2>
-            
-            <!-- Track Selection Tabs -->
-            <div class="track-tabs">
-                <button class="track-tab active" data-track="wounds">
-                    <div class="track-tab-title">
-                        <span class="track-number">1</span>
-                        <span>&#346;cie&#380;ka 1: Leczenie Ran Przew&#322;ek&#322;ych</span>
+            <h2 class="section-title">Prelegenci</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="prelegenci/krasowski.jpg" alt="dr n. med. Grzegorz Krasowski">
                     </div>
-                </button>
-                <button class="track-tab" data-track="nutrition">
-                    <div class="track-tab-title">
-                        <span class="track-number">2</span>
-                        <span>&#346;cie&#380;ka 2: Leczenie &#379;ywieniowe</span>
-                    </div>
-                </button>
-            </div>
-
-            <!-- Wounds Track Content -->
-            <div class="track-content active" id="wounds-track">
-                <!-- Day Tabs for Wounds -->
-                <div class="day-tabs">
-                    <button class="day-tab active" data-track="wounds" data-day="wounds-day1">
-                        <div>Dzień 1</div>
-                        <div class="day-date">27 listopada - Zajęcia praktyczne</div>
-                    </button>
-                    <button class="day-tab" data-track="wounds" data-day="wounds-day2">
-                        <div>Dzień 2</div>
-                        <div class="day-date">28 listopada - Zajęcia teoretyczne</div>
-                    </button>
-                </div>
-                
-                <!-- Wounds Day 1 Content -->
-                <div class="day-section active" id="wounds-day1">
-                    <div class="program-timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-time">09:00 - 09:30</div>
-                            <div class="timeline-content">
-                                <h4>Dekalog leczenia ran</h4>
-                                <p class="timeline-speaker">dr n. med. Grzegorz Krasowski</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item sponsored">
-                            <div class="timeline-time">09:30 - 09:45</div>
-                            <div class="timeline-content">
-                                <h4>Czysta rana warunkiem powodzenie terapeutycznego</h4>
-                                <p class="timeline-speaker">Wykład sponsorowany: Aesculap Chifa Sp. z o.o. - mgr Krzysztof Szczepaniak</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">10:00 - 10:30</div>
-                            <div class="timeline-content">
-                                <h4>Dezynfekcja rąk</h4>
-                                <p class="timeline-speaker">mgr Barbara Próchnicka</p>
-                                <p class="timeline-location">Gabinet Pielęgniarki Naczelnej</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">10:30 - 11:00</div>
-                            <div class="timeline-content">
-                                <h4>Metody oczyszczania ran przewlekłych, pobranie posiewu</h4>
-                                <p class="timeline-speaker">Lek. Robert Wajda</p>
-                                <p class="timeline-location">Gabinet Pielęgniarki Naczelnej</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">11:00 - 11:45</div>
-                            <div class="timeline-content">
-                                <h4>Oczyszczanie ran pacjenta - zajęcia praktyczne</h4>
-                                <p class="timeline-speaker">Pielęgniarka opatrunkowa</p>
-                                <p class="timeline-location">Oddział Chirurgii Ogólnej</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">11:45 - 12:30</div>
-                            <div class="timeline-content">
-                                <h4>Opatrunek kompresyjny</h4>
-                                <p class="timeline-speaker">Aneta Rzęsikowska</p>
-                                <p class="timeline-location">Oddział Chirurgii Ogólnej</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item break">
-                            <div class="timeline-time">12:30 - 13:00</div>
-                            <div class="timeline-content">
-                                <h4>Przerwa kawowa</h4>
-                                <p class="timeline-note">Przeniesienie do Starostwa Powiatowego</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">13:00 - 13:30</div>
-                            <div class="timeline-content">
-                                <h4>Kompresjoterapia - podstawy teoretyczne</h4>
-                                <p class="timeline-speaker">dr n. med. Grzegorz Krasowski</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna 2</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">13:30 - 14:30</div>
-                            <div class="timeline-content">
-                                <h4>Kompresjoterapia bandażami - zajęcia praktyczne</h4>
-                                <p class="timeline-speaker">Marta Zielińska</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna 2</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item break">
-                            <div class="timeline-time">14:30 - 15:00</div>
-                            <div class="timeline-content">
-                                <h4>Przerwa na lunch</h4>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">15:00 - 16:00</div>
-                            <div class="timeline-content">
-                                <h4>Gotowe wyroby kompresyjne w leczeniu ran</h4>
-                                <p class="timeline-speaker">Magdalena Biniecka</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">16:00 - 17:00</div>
-                            <div class="timeline-content">
-                                <h4>Rehabilitacja ruchowa przyłóżkowa</h4>
-                                <p class="timeline-speaker">Kordian Mazurkiewicz</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">17:00 - 18:00</div>
-                            <div class="timeline-content">
-                                <h4>Pobieranie i ocena badań mikrobiologicznych</h4>
-                                <p class="timeline-speaker">mgr Barbara Próchnicka</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wounds Day 2 Content -->
-                <div class="day-section" id="wounds-day2">
-                    <div class="program-timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-time">09:00 - 09:45</div>
-                            <div class="timeline-content">
-                                <h4>Dekalog leczenia ran</h4>
-                                <p class="timeline-speaker">dr n. med. Grzegorz Krasowski</p>
-                                <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">09:45 - 10:15</div>
-                            <div class="timeline-content">
-                                <h4>Rany rzadkie</h4>
-                                <p class="timeline-speaker">Lek. Katarzyna Tarara</p>
+                    <div class="speaker-info">
+                        <div class="speaker-name">dr n. med. Grzegorz Krasowski</div>
                                 <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
                             </div>
                         </div>
@@ -1916,7 +1961,7 @@
             </div>
 
             <!-- Nutrition Track Content -->
-            <div class="track-content" id="nutrition-track">
+            <div class="track-content active" id="nutrition-track">
                 <!-- Day Tabs for Nutrition -->
                 <div class="day-tabs">
                     <button class="day-tab active" data-track="nutrition" data-day="nutrition-day1">
@@ -2038,7 +2083,7 @@
                             <div class="timeline-time">16:00 - 17:00</div>
                             <div class="timeline-content">
                                 <h4>Rehabilitacja ruchowa przyłóżkowa</h4>
-                                <p class="timeline-speaker">Kordian Mazurkiewicz</p>
+                                <p class="timeline-speaker">Michał Krasowski</p>
                                 <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
                             </div>
                         </div>
@@ -2165,6 +2210,68 @@
         </div>
     </section>
 
+    <!-- Program - obrazy dla dwóch dni -->
+    <section class="program fade-in" id="program-images">
+        <div class="container">
+            <h2 class="section-title">Program Warsztatów</h2>
+            
+            <div class="program-images-tabs">
+                <button class="program-images-tab active" data-program="nutrition">
+                    Program Leczenia Żywieniowego
+                </button>
+                <button class="program-images-tab" data-program="wounds">
+                    Program Leczenia Ran
+                </button>
+            </div>
+
+            <div class="program-images-wrapper">
+                <div class="program-images-content active" id="program-nutrition">
+                    <div class="program-content-header">
+                        <h3>Program Leczenia Żywieniowego</h3>
+                    </div>
+                    <div class="program-images-grid">
+                        <div class="program-image-card">
+                            <div class="program-day-label">Dzień 1</div>
+                            <img src="leczenie_1.jpg" alt="Program leczenie żywieniowe - dzień 1" onclick="window.open('leczenie_1.jpg', '_blank')">
+                            <div class="program-image-overlay">
+                                <span>Kliknij aby powiększyć</span>
+                            </div>
+                        </div>
+                        <div class="program-image-card">
+                            <div class="program-day-label">Dzień 2</div>
+                            <img src="leczenie2.jpg" alt="Program leczenie żywieniowe - dzień 2" onclick="window.open('leczenie2.jpg', '_blank')">
+                            <div class="program-image-overlay">
+                                <span>Kliknij aby powiększyć</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-images-content" id="program-wounds">
+                    <div class="program-content-header">
+                        <h3>Program Leczenia Ran</h3>
+                    </div>
+                    <div class="program-images-grid">
+                        <div class="program-image-card">
+                            <div class="program-day-label">Dzień 1</div>
+                            <img src="rany1.jpg" alt="Program leczenie ran - dzień 1" onclick="window.open('rany1.jpg', '_blank')">
+                            <div class="program-image-overlay">
+                                <span>Kliknij aby powiększyć</span>
+                            </div>
+                        </div>
+                        <div class="program-image-card">
+                            <div class="program-day-label">Dzień 2</div>
+                            <img src="rany2.jpg" alt="Program leczenie ran - dzień 2" onclick="window.open('rany2.jpg', '_blank')">
+                            <div class="program-image-overlay">
+                                <span>Kliknij aby powiększyć</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Speakers Section -->
     <section class="speakers fade-in" id="speakers">
         <div class="container">
@@ -2235,7 +2342,7 @@
                 </div>
                 <div class="speaker-card">
                     <div class="speaker-image">
-                        <img src="prelegenci/mazurkiewicz.jpg" alt="Kordian Mazurkiewicz">
+                        <img src="prelegenci/2mazurkiewicz.jpg" alt="Kordian Mazurkiewicz">
                     </div>
                     <div class="speaker-info">
                         <div class="speaker-name">Kordian Mazurkiewicz</div>
@@ -2414,13 +2521,22 @@
                     <img src="logo_partnerzy/2fresenius-kabi-polska-sp-z-o-o.webp" alt="Fresenius Kabi">
                 </div>
                 <div class="partner-logo">
-                    <img src="logo_partnerzy/0001035_evo-pharma.jpeg" alt="Evopharma">
+                    <img src="logo_partnerzy/ewo_pharma_cmyk_co.jpg" alt="Evopharma">
                 </div>
                 <div class="partner-logo">
                     <img src="logo_partnerzy/2Baxter_Wordmark_2022_Blue_RGB_300dpi.jpg" alt="Baxter">
                 </div>
                 <div class="partner-logo">
                     <img src="logo_partnerzy/2Unknown.jpeg" alt="Reha-Med">
+                </div>
+                <div class="partner-logo">
+                    <img src="logo_partnerzy/logo_aesculap_chifa_small.png" alt="Aesculap Chifa">
+                </div>
+                <div class="partner-logo">
+                    <img src="logo_partnerzy/Medi.svg.png" alt="Medi">
+                </div>
+                <div class="partner-logo">
+                    <img src="logo_partnerzy/cidB2EBF890-A7B3-48B7-B06A-F1110CFD92F6.jpeg" alt="Partner">
                 </div>
             </div>
         </div>
@@ -2456,7 +2572,7 @@
             <div class="footer-section">
                 <h3>Przydatne linki</h3>
                 <a href="#about">O Warsztatach</a>
-                <a href="#program">Program</a>
+                <a href="#program-images">Program</a>
                 <a href="#speakers">Prelegenci</a>
                 <a href="#registration">Rejestracja</a>
             </div>
@@ -2584,11 +2700,24 @@
                 document.querySelectorAll('.track-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.track-content').forEach(c => c.classList.remove('active'));
                 
+                // Hide all track images
+                document.querySelectorAll('.track-images').forEach(img => {
+                    img.style.display = 'none';
+                    img.classList.remove('active');
+                });
+                
                 // Add active class to clicked tab and corresponding content
                 tab.classList.add('active');
                 const trackContent = document.getElementById(trackId + '-track');
                 if (trackContent) {
                     trackContent.classList.add('active');
+                }
+                
+                // Show corresponding track images
+                const trackImages = document.getElementById(trackId + '-images');
+                if (trackImages) {
+                    trackImages.style.display = 'block';
+                    trackImages.classList.add('active');
                 }
             });
         });
@@ -2613,6 +2742,23 @@
                 const daySection = document.getElementById(dayId);
                 if (daySection) {
                     daySection.classList.add('active');
+                }
+            });
+        });
+
+        // Program images tabs switching
+        const programImageTabs = document.querySelectorAll('.program-images-tab');
+        programImageTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const programId = tab.getAttribute('data-program');
+
+                document.querySelectorAll('.program-images-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.program-images-content').forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                const content = document.getElementById('program-' + programId);
+                if (content) {
+                    content.classList.add('active');
                 }
             });
         });
