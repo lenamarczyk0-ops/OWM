@@ -220,7 +220,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+        }
+
+        /* Live Indicator in Hero */
+        .live-indicator {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .live-indicator.active {
+            display: flex;
+        }
+
+        .live-dot-hero {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        .live-indicator::after {
+            content: 'TRWA';
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 4px 25px rgba(16, 185, 129, 0.8); }
         }
 
         .cta-button {
@@ -432,73 +470,199 @@
         }
 
         /* Countdown Timer */
-        .countdown-container {
+        /* Live Workshop Status */
+        .live-workshop-container {
             text-align: center;
             margin: 4rem auto 0;
             padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(37, 99, 235, 0.1);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
+            border-radius: 24px;
+            border: 3px solid rgba(16, 185, 129, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .countdown-title {
-            font-size: 1.8rem;
+        .live-workshop-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #2563eb, #10b981);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
         }
 
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
         }
 
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: var(--white);
-            padding: 1.5rem 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
-            min-width: 100px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        .countdown-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.2);
-        }
-
-        .countdown-value {
-            font-size: 3rem;
+        .live-title {
+            font-size: 2rem;
             font-weight: 800;
-            background: var(--medical-gradient);
+            background: linear-gradient(135deg, #10b981, #2563eb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1;
             margin-bottom: 0.5rem;
         }
 
-        .countdown-label {
-            font-size: 0.9rem;
-            font-weight: 600;
+        .live-date {
+            font-size: 1.1rem;
             color: var(--dark-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 2rem;
         }
 
-        .countdown-separator {
-            font-size: 2.5rem;
+        .current-lectures {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .lecture-group {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lecture-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(15, 23, 42, 0.15);
+        }
+
+        .lecture-group-1 {
+            border-top: 4px solid #10b981;
+        }
+
+        .lecture-group-2 {
+            border-top: 4px solid #2563eb;
+        }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .group-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .lecture-group-1 .group-number {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .lecture-group-2 .group-number {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        }
+
+        .group-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .lecture-card {
+            text-align: left;
+        }
+
+        .lecture-time {
+            display: inline-block;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 0 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .lecture-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+        }
+
+        .lecture-speaker {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 0.4rem;
+        }
+
+        .lecture-speaker::before {
+            content: '👤 ';
+        }
+
+        .lecture-location {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .lecture-location::before {
+            content: '📍 ';
+        }
+
+        .live-info {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .lecture-break {
+            background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
+        }
+
+        .lecture-break .lecture-title {
+            color: #92400e;
         }
 
         /* Program Section - Professional Design */
@@ -1315,6 +1479,120 @@
             object-fit: contain;
         }
 
+        /* Current Gallery Section */
+        .current-gallery {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 5rem 0;
+        }
+
+        .current-gallery .section-title {
+            color: white;
+        }
+
+        .current-gallery .section-title::after {
+            background: linear-gradient(90deg, #10b981, #2563eb);
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.8), rgba(37, 99, 235, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
         /* Partners Section */
         .partners {
             background: var(--light-color);
@@ -1496,57 +1774,52 @@
                 min-height: auto;
             }
 
-            .countdown-container {
-                padding: 1.2rem;
+            /* Live Workshop Mobile Styles */
+            .live-workshop-container {
+                padding: 1.5rem 1rem;
                 margin: 2rem auto 0;
-                border-radius: 15px;
+                border-radius: 16px;
             }
 
-            .countdown-title {
-                font-size: 1.1rem;
+            .live-title {
+                font-size: 1.3rem;
+            }
+
+            .live-date {
+                font-size: 0.95rem;
+            }
+
+            .current-lectures {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .lecture-group {
+                padding: 1.2rem;
+            }
+
+            .group-header {
+                gap: 0.8rem;
                 margin-bottom: 1rem;
+                padding-bottom: 0.8rem;
             }
 
-            .countdown-timer {
-                gap: 0.3rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .group-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
             }
 
-            .countdown-item {
-                padding: 0.8rem 1rem;
-                min-width: 60px;
-                border-radius: 12px;
+            .group-name {
+                font-size: 1rem;
             }
 
-            .countdown-value {
-                font-size: 1.6rem;
-                line-height: 1;
+            .lecture-title {
+                font-size: 1.05rem;
             }
 
-            .countdown-label {
-                font-size: 0.6rem;
-                margin-top: 0.3rem;
-            }
-
-            .countdown-separator {
-                font-size: 1.4rem;
-                margin: 0 0.1rem;
-                align-self: center;
-            }
-
-            /* Hide seconds on mobile */
-            .countdown-item:last-child {
-                display: none;
-            }
-            
-            .countdown-separator:last-child {
-                display: none;
-            }
-
-            /* Hide separator after minutes on mobile */
-            .countdown-separator:nth-last-child(2) {
-                display: none;
+            .lecture-speaker, .lecture-location {
+                font-size: 0.85rem;
             }
 
             .track-tabs {
@@ -1741,8 +2014,8 @@
                 <li><a href="#about">O Warsztatach</a></li>
                 <li><a href="#program-images">Program</a></li>
                 <li><a href="#speakers">Prelegenci</a></li>
+                <li><a href="#gallery">Galeria</a></li>
                 <li><a href="#location">Lokalizacja</a></li>
-                <li><a href="#registration">Rejestracja</a></li>
             </ul>
         </div>
     </nav>
@@ -1759,16 +2032,12 @@
                 Współczesne standardy postępowania w leczeniu ran przewlekłych, dostępach naczyniowych i żywieniu klinicznym
             </p>
             <div class="hero-date">
+                <span class="live-indicator" id="liveIndicator" title="Warsztaty trwają!">
+                    <span class="live-dot-hero"></span>
+                </span>
                 <span class="icon icon-calendar"></span>
                 <span>27-28 Listopada 2025 | Krapkowice</span>
             </div>
-            <a href="#registration" class="cta-button">
-                Zarejestruj się teraz
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="margin-left: 10px; vertical-align: middle;">
-                    <path d="M10 3L9 4l5 5H3v2h11l-5 5 1 1 7-7-7-7z"/>
-                </svg>
-            </a>
-            
             <!-- Organizatorzy -->
             <div class="hero-organizers">
                 <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.9; color: var(--white);">Organizatorzy:</p>
@@ -1835,32 +2104,46 @@
                 </div>
             </div>
             
-            <!-- Countdown Timer -->
-            <div class="countdown-container">
-                <h3 class="countdown-title">Do warsztatów zostało</h3>
-                <div class="countdown-timer">
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="days">0</span>
-                        <span class="countdown-label">Dni</span>
+            <!-- Live Workshop Status -->
+            <div class="live-workshop-container">
+                <div class="live-badge">
+                    <span class="live-dot"></span>
+                    NA ŻYWO
                     </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="hours">0</span>
-                        <span class="countdown-label">Godzin</span>
+                <h3 class="live-title">🎓 Opolskie Warsztaty Medyczne już trwają!</h3>
+                <p class="live-date" id="currentDate"></p>
+                
+                <div class="current-lectures">
+                    <div class="lecture-group lecture-group-1">
+                        <div class="group-header">
+                            <span class="group-number">1</span>
+                            <span class="group-name">Leczenie Żywieniowe</span>
                     </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="minutes">0</span>
-                        <span class="countdown-label">Minut</span>
+                        <div class="lecture-card" id="lecture-group1">
+                            <div class="lecture-time" id="time-group1">--:-- - --:--</div>
+                            <div class="lecture-title" id="title-group1">Ładowanie...</div>
+                            <div class="lecture-speaker" id="speaker-group1"></div>
+                            <div class="lecture-location" id="location-group1"></div>
                     </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="seconds">0</span>
-                        <span class="countdown-label">Sekund</span>
                     </div>
-                </div>
+                    
+                    <div class="lecture-group lecture-group-2">
+                        <div class="group-header">
+                            <span class="group-number">2</span>
+                            <span class="group-name">Leczenie Ran</span>
+                    </div>
+                        <div class="lecture-card" id="lecture-group2">
+                            <div class="lecture-time" id="time-group2">--:-- - --:--</div>
+                            <div class="lecture-title" id="title-group2">Ładowanie...</div>
+                            <div class="lecture-speaker" id="speaker-group2"></div>
+                            <div class="lecture-location" id="location-group2"></div>
+                    </div>
             </div>
-        </div>
+                </div>
+                
+                <p class="live-info">Automatyczna aktualizacja co minutę</p>
+                            </div>
+                        </div>
     </section>
 
 
@@ -1872,7 +2155,7 @@
                 <div class="speaker-card">
                     <div class="speaker-image">
                         <img src="prelegenci/krasowski.jpg" alt="dr n. med. Grzegorz Krasowski">
-                    </div>
+                            </div>
                     <div class="speaker-info">
                         <div class="speaker-name">dr n. med. Grzegorz Krasowski</div>
                                 <p class="timeline-location">Starostwo Powiatowe - Sala Konferencyjna</p>
@@ -2271,7 +2554,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Speakers Section -->
     <section class="speakers fade-in" id="speakers">
         <div class="container">
@@ -2453,55 +2736,69 @@
         </div>
     </section>
 
-    <!-- Registration Section -->
-    <section class="registration fade-in" id="registration">
+    <!-- Current Gallery Section -->
+    <section class="current-gallery fade-in" id="gallery">
         <div class="container">
-            <h2 class="section-title">Rejestracja na warsztaty</h2>
-            <div class="registration-info">
-                <div class="price-cards">
-                    <div class="price-card">
-                        <h3>Leczenie Ran Przewlekłych</h3>
-                        <div class="price">970 zł</div>
-                        <ul class="price-features">
-                            <li>Podstawowy kurs leczenia ran</li>
-                            <li>Zajęcia praktyczne z pacjentami</li>
-                            <li>Kurs leczenia bólu</li>
-                            <li>Kurs zakładania opatrunków podciśnieniowych</li>
-                            <li>Kurs kompresjoterapii</li>
-                            <li>Certyfikat kompetencji</li>
-                        </ul>
+            <h2 class="section-title">Galeria - OWM 2025</h2>
+            <p class="gallery-subtitle">Zdjęcia z tegorocznych XVI Opolskich Warsztatów Medycznych</p>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4773.jpg')">
+                    <img src="galeria_aktualna/IF0A4773.jpg" alt="OWM 2025 - Zdjęcie 1" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
                     </div>
-                    <div class="price-card">
-                        <h3>Leczenie Żywieniowe</h3>
-                        <div class="price">1100 zł</div>
-                        <ul class="price-features">
-                            <li>Kurs żywienia pozajelitowego i dojelitowego</li>
-                            <li>Endoskopowa gastropeksja z gastrostomią</li>
-                            <li>Kurs leczenia bólu</li>
-                            <li>Wytwarzanie centralnych dostępów naczyniowych</li>
-                            <li>Warsztaty praktyczne</li>
-                            <li>Certyfikat kompetencji</li>
-                        </ul>
+                    </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4781.jpg')">
+                    <img src="galeria_aktualna/IF0A4781.jpg" alt="OWM 2025 - Zdjęcie 2" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
                     </div>
                 </div>
-                <div class="registration-cta">
-                    <p class="registration-text">
-                        Rejestracja odbywa się przez oficjalny formularz zgłoszeniowy organizatora.<br>
-                        Kliknij poniższy przycisk, aby przejść do formularza rejestracyjnego.
-                    </p>
-                    <a href="https://nutrikon.pl/zgloszenie-na-16-owm/" target="_blank" class="submit-button">
-                        Przejdź do formularza rejestracji
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="margin-left: 10px; vertical-align: middle;">
-                            <path d="M10 3L9 4l5 5H3v2h11l-5 5 1 1 7-7-7-7z"/>
-                        </svg>
-                    </a>
-                    <p class="registration-note">
-                        Formularz otworzy się w nowej karcie
-                    </p>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4790.jpg')">
+                    <img src="galeria_aktualna/IF0A4790.jpg" alt="OWM 2025 - Zdjęcie 3" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4797.jpg')">
+                    <img src="galeria_aktualna/IF0A4797.jpg" alt="OWM 2025 - Zdjęcie 3" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4803.jpg')">
+                    <img src="galeria_aktualna/IF0A4803.jpg" alt="OWM 2025 - Zdjęcie 4" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4805.jpg')">
+                    <img src="galeria_aktualna/IF0A4805.jpg" alt="OWM 2025 - Zdjęcie 5" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4807.jpg')">
+                    <img src="galeria_aktualna/IF0A4807.jpg" alt="OWM 2025 - Zdjęcie 6" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('galeria_aktualna/IF0A4810.jpg')">
+                    <img src="galeria_aktualna/IF0A4810.jpg" alt="OWM 2025 - Zdjęcie 7" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span>🔍 Powiększ</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Powiększone zdjęcie">
+    </div>
 
     <!-- Partners Section -->
     <section class="partners fade-in" id="partners">
@@ -2574,7 +2871,6 @@
                 <a href="#about">O Warsztatach</a>
                 <a href="#program-images">Program</a>
                 <a href="#speakers">Prelegenci</a>
-                <a href="#registration">Rejestracja</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -2778,33 +3074,188 @@
             });
         });
 
-        // Countdown Timer
-        function updateCountdown() {
-            const workshopDate = new Date('2025-11-27T10:00:00');
-            const now = new Date();
-            const difference = workshopDate - now;
+        // Live Workshop - Schedule Data
+        const scheduleDay1 = {
+            date: '2025-11-27',
+            dayName: 'Dzień 1 - Czwartek, 27 listopada 2025',
+            group1: [ // Leczenie Żywieniowe
+                { start: '10:00', end: '10:30', title: 'Leczenie żywieniowe – co, gdzie, dlaczego?', speaker: 'Grzegorz Krasowski, Robert Wajda', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '10:30', end: '11:50', title: 'Wyliczanie zapotrzebowania mieszaniny żywieniowej', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '11:50', end: '12:10', title: 'Kwalifikacja do leczenia żywieniowego w warunkach domowych', speaker: 'Robert Wajda', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '12:10', end: '12:20', title: 'Q&A - Pytania i odpowiedzi', speaker: 'Grzegorz Krasowski, Robert Wajda', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '12:20', end: '12:40', title: 'Leczenie żywieniowe dojelitowe w warunkach domowych – dostępy', speaker: 'Robert Wajda', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '12:40', end: '13:00', title: 'Powikłania leczenia żywieniowego dojelitowego', speaker: 'Sonia Nowak', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '13:00', end: '13:20', title: 'Leczenie żywieniowe pozajelitowe – dostępy i sposoby podaży', speaker: 'Bartłomiej Kazek', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '13:20', end: '13:40', title: 'Powikłania leczenia żywieniowego pozajelitowego', speaker: 'Lidia Haliniak', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '13:40', end: '14:00', title: 'Organizacja, dokumentacja procesu leczenia, kontrola NFZ', speaker: 'Małgorzata Konachiewicz', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '14:20', end: '14:30', title: 'Q&A - Pytania i odpowiedzi', speaker: 'Robert Wajda, Bartłomiej Kazek', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '14:30', end: '15:00', title: '🍽️ PRZERWA NA LUNCH', speaker: '', location: '', isBreak: true },
+                { start: '15:00', end: '15:15', title: 'Żelazo dożylne w prehabilitacji (wykład sponsorowany)', speaker: 'Agnieszka Setniewska (Evopharma)', location: 'Starostwo Powiatowe, Krapkowice 2' },
+                { start: '15:15', end: '15:35', title: 'Żywienie pozajelitowe – od wytycznych do praktyki', speaker: 'Diana Wójcik (Baxter)', location: 'Starostwo Powiatowe, Krapkowice 2' },
+                { start: '15:35', end: '15:55', title: 'Omega-3 w żywieniu pozajelitowym (wykład sponsorowany)', speaker: 'Agnieszka Drążkiewicz-Miszczak (Fresenius)', location: 'Starostwo Powiatowe, Krapkowice 2' },
+                { start: '16:00', end: '17:00', title: 'Rehabilitacja ruchowa przyłóżkowa', speaker: 'Kordian Mazurkiewicz', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '17:00', end: '18:00', title: 'Pobieranie i ocena badań mikrobiologicznych', speaker: 'Barbara Próchnicka', location: 'Starostwo Powiatowe, Sala Konferencyjna' }
+            ],
+            group2: [ // Leczenie Ran
+                { start: '10:00', end: '10:30', title: 'Dezynfekcja rąk', speaker: 'Barbara Próchnicka', location: 'Gabinet Pielęgniarki Naczelnej' },
+                { start: '10:30', end: '11:00', title: 'Metody oczyszczania ran przewlekłych, pobranie posiewu', speaker: 'Robert Wajda', location: 'Gabinet Pielęgniarki Naczelnej' },
+                { start: '11:00', end: '11:45', title: 'Oczyszczanie ran pacjenta - zajęcia praktyczne', speaker: 'Pielęgniarka opatrunkowa', location: 'Oddział Chirurgii Ogólnej' },
+                { start: '11:45', end: '12:30', title: 'Opatrunek kompresyjny', speaker: 'Aneta Rzęsikowska', location: 'Oddział Chirurgii Ogólnej' },
+                { start: '12:30', end: '13:00', title: '☕ PRZERWA KAWOWA', speaker: 'Zajęcia przenoszą się do Starostwa Powiatowego', location: '', isBreak: true },
+                { start: '13:00', end: '13:30', title: 'Kompresjoterapia – podstawy teoretyczne', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna 2' },
+                { start: '13:30', end: '14:30', title: 'Kompresjoterapia bandażami – zajęcia praktyczne', speaker: 'Marta Zielińska', location: 'Starostwo Powiatowe, Sala Konferencyjna 2' },
+                { start: '14:30', end: '15:00', title: '🍽️ PRZERWA NA LUNCH', speaker: '', location: '', isBreak: true },
+                { start: '15:00', end: '16:00', title: 'Gotowe wyroby kompresyjne w leczeniu ran', speaker: 'Magdalena Biniecka', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '16:00', end: '17:00', title: 'Rehabilitacja ruchowa przyłóżkowa', speaker: 'Kordian Mazurkiewicz', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '17:00', end: '18:00', title: 'Pobieranie i ocena badań mikrobiologicznych', speaker: 'Barbara Próchnicka', location: 'Starostwo Powiatowe, Sala Konferencyjna' }
+            ]
+        };
 
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        const scheduleDay2 = {
+            date: '2025-11-28',
+            dayName: 'Dzień 2 - Piątek, 28 listopada 2025',
+            group1: [ // Leczenie Żywieniowe - Dzień 2
+                { start: '10:00', end: '10:30', title: 'Dezynfekcja rąk', speaker: 'Barbara Próchnicka', location: 'Gabinet Pielęgniarki Naczelnej' },
+                { start: '10:30', end: '12:30', title: 'Endoskopowa gastrostomia odżywcza (PEG) – zajęcia praktyczne', speaker: 'Lek. Sławomir Sobótka', location: 'Oddział Chirurgii Ogólnej' },
+                { start: '12:30', end: '14:30', title: 'Szkolenie pacjenta i rodziny – zajęcia praktyczne', speaker: 'Aneta Rzęsikowska', location: 'Oddział Chirurgii Ogólnej' },
+                { start: '14:30', end: '15:00', title: '🍽️ PRZERWA NA LUNCH', speaker: '', location: '', isBreak: true },
+                { start: '15:00', end: '16:00', title: 'Leczenie bólu w warunkach domowych', speaker: 'Lek. Dorota Kala', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '16:00', end: '17:00', title: 'Trudny pacjent czy słaby medyk?', speaker: 'mgr Ewa Woytoń', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '17:00', end: '18:00', title: 'Rozpoznawanie niedożywienia', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '18:00', end: '18:30', title: '📝 TEST ZALICZENIOWY', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' }
+            ],
+            group2: [ // Leczenie Ran - Dzień 2
+                { start: '10:00', end: '10:15', title: 'Wykład teoretyczny - Opatrunki', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '10:15', end: '12:15', title: 'Dobór opatrunku do rany – zajęcia praktyczne (½ grupy)', speaker: 'ConvaTec / Urgo', location: 'Starostwo Powiatowe, Sale Konferencyjne' },
+                { start: '12:15', end: '13:00', title: 'Zaopatrzenie pacjenta w wyroby ortopedyczne', speaker: 'Reha-Med', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '13:00', end: '13:30', title: 'Terapia podciśnieniowa (wykład sponsorowany)', speaker: 'Hartmann', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '13:30', end: '14:00', title: 'Opatrunki SAP w leczeniu ran trudno gojących się', speaker: 'Hartmann - Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '14:00', end: '14:30', title: 'Zespół stopy cukrzycowej', speaker: 'Lek. Katarzyna Tarara', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '14:30', end: '15:00', title: '🍽️ PRZERWA NA LUNCH', speaker: '', location: '', isBreak: true },
+                { start: '15:00', end: '16:00', title: 'Leczenie bólu w warunkach domowych', speaker: 'Lek. Dorota Kala', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '16:00', end: '17:00', title: 'Trudny pacjent czy słaby medyk?', speaker: 'mgr Ewa Woytoń', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '17:00', end: '18:00', title: 'Rozpoznawanie niedożywienia', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' },
+                { start: '18:00', end: '18:30', title: '📝 TEST ZALICZENIOWY', speaker: 'Grzegorz Krasowski', location: 'Starostwo Powiatowe, Sala Konferencyjna' }
+            ]
+        };
 
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            } else {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-            }
+        function timeToMinutes(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
         }
 
-        // Update countdown every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        function getCurrentLecture(schedule, currentMinutes) {
+            for (const lecture of schedule) {
+                const startMin = timeToMinutes(lecture.start);
+                const endMin = timeToMinutes(lecture.end);
+                if (currentMinutes >= startMin && currentMinutes < endMin) {
+                    return lecture;
+                }
+            }
+            // Sprawdź czy przed pierwszym wykładem
+            if (schedule.length > 0 && currentMinutes < timeToMinutes(schedule[0].start)) {
+                return { title: 'Wykłady rozpoczną się o ' + schedule[0].start, speaker: 'Proszę czekać...', location: '', start: '--:--', end: schedule[0].start, isPending: true };
+            }
+            // Sprawdź czy po ostatnim wykładzie
+            if (schedule.length > 0 && currentMinutes >= timeToMinutes(schedule[schedule.length - 1].end)) {
+                return { title: 'Wykłady na dziś zakończone', speaker: 'Do zobaczenia jutro!', location: '', start: '--:--', end: '--:--', isEnded: true };
+            }
+            // Między wykładami
+            return { title: 'Przerwa między wykładami', speaker: '', location: '', start: '--:--', end: '--:--', isBreak: true };
+        }
+
+        function updateLiveSchedule() {
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const totalMinutes = currentHours * 60 + currentMinutes;
+
+            let schedule;
+            if (today === scheduleDay1.date) {
+                schedule = scheduleDay1;
+            } else if (today === scheduleDay2.date) {
+                schedule = scheduleDay2;
+            } else {
+                // Dla demonstracji użyj dnia 1
+                schedule = scheduleDay1;
+            }
+
+            // Aktualizuj datę
+            document.getElementById('currentDate').textContent = schedule.dayName;
+
+            // Aktualizuj Grupę 1
+            const lecture1 = getCurrentLecture(schedule.group1, totalMinutes);
+            const card1 = document.getElementById('lecture-group1');
+            document.getElementById('time-group1').textContent = lecture1.start + ' - ' + lecture1.end;
+            document.getElementById('title-group1').textContent = lecture1.title;
+            document.getElementById('speaker-group1').textContent = lecture1.speaker || '';
+            document.getElementById('location-group1').textContent = lecture1.location || '';
+            card1.className = 'lecture-card' + (lecture1.isBreak ? ' lecture-break' : '');
+
+            // Aktualizuj Grupę 2
+            const lecture2 = getCurrentLecture(schedule.group2, totalMinutes);
+            const card2 = document.getElementById('lecture-group2');
+            document.getElementById('time-group2').textContent = lecture2.start + ' - ' + lecture2.end;
+            document.getElementById('title-group2').textContent = lecture2.title;
+            document.getElementById('speaker-group2').textContent = lecture2.speaker || '';
+            document.getElementById('location-group2').textContent = lecture2.location || '';
+            card2.className = 'lecture-card' + (lecture2.isBreak ? ' lecture-break' : '');
+        }
+
+        // Uruchom natychmiast i aktualizuj co minutę
+        updateLiveSchedule();
+        setInterval(updateLiveSchedule, 60000);
+
+        // Lightbox dla galerii
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Zamknij lightbox klawiszem Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Live Indicator - pokazuj zieloną ikonę gdy warsztaty trwają
+        function updateLiveIndicator() {
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const totalMinutes = currentHours * 60 + currentMinutes;
+            
+            const indicator = document.getElementById('liveIndicator');
+            if (!indicator) return;
+            
+            // Warsztaty trwają 27-28 listopada 2025, od 10:00 do 18:30
+            const isWorkshopDay = (today === '2025-11-27' || today === '2025-11-28');
+            const workshopStart = 10 * 60; // 10:00
+            const workshopEnd = 18 * 60 + 30; // 18:30
+            const isDuringHours = (totalMinutes >= workshopStart && totalMinutes <= workshopEnd);
+            
+            if (isWorkshopDay && isDuringHours) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        }
+        
+        // Uruchom natychmiast i aktualizuj co minutę
+        updateLiveIndicator();
+        setInterval(updateLiveIndicator, 60000);
     </script>
 </body>
 </html>
